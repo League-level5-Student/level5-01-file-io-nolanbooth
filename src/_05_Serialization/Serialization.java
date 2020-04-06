@@ -1,4 +1,4 @@
-package _04_Serialization;
+package _05_Serialization;
 
 import org.junit.Test;
 
