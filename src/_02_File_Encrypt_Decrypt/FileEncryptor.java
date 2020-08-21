@@ -17,7 +17,7 @@ public class FileEncryptor {
 	 * 
 	 * "Hello World" changes to "Lipps Asvph"
 	 *
-	 * Create a program that takes a message and a key from the user.
-	 * Use the key to shift each letter in the users input and save the final result to a file.
+	 * Create a program that takes a messager.
+	 * Use any key you want (1 - 25) to shift each letter in the users input and save the final result to a file.
 	 */
 }
