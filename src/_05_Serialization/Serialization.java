@@ -1,14 +1,10 @@
 package _05_Serialization;
 
-
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.io.*;
 
-import org.junit.jupiter.api.Test;
-
-
+import static org.junit.Assert.assertEquals;
 
 /*
  * Serialization is the process of converting an object into a stream of bytes
@@ -19,31 +15,31 @@ import org.junit.jupiter.api.Test;
  * class that implements the Serializable interface can be "saved", as long
  * as all of its member variables are also serializable.
  *
- * Challenge: Complete the MinecraftCreeper class so that the test passes 
- * by making it implement the Serializable interface.
+ * Challenge: Complete the SaveData class so that the test passes.
  */
 public class Serialization {
-	private static final String DATA_FILE = "src/_05_Serialization/saved.dat";
+	private static final String DATA_FILE = "src/_04_Serialization/saved.dat";
 
 	@Test
 	public void test() {
-		// Construct a MinecraftCreeper object and save it to a file
-		save(new MinecraftCreeper("Bonnie", 100, 250, 0));
+		String name = "Jeff";
+		int age = 32;
 
-		// Load the MinecraftCreeper object from the file
-		MinecraftCreeper creeper = load();
+		// Construct a SaveData object and save it to a file
+		save(new SaveData(name, age));
 
-		assertEquals("Bonnie", creeper.name);
-		assertEquals(100, creeper.xPosition);
-		assertEquals(250, creeper.yPosition);
-		assertEquals(0, creeper.zPosition);
+		// Load the SaveData object from the file
+		SaveData loadedData = load();
+
+		assertEquals(name, loadedData.name);
+		assertEquals(age, loadedData.age);
 	}
 
 	/*
 	 * One simple way to save a serializable object to a file is using a FileOutputStream
 	 * and ObjectOutputStream.
 	 */
-	private static void save(MinecraftCreeper data) {
+	private static void save(SaveData data) {
 		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(data);
 		} catch (IOException e) {
@@ -51,9 +47,9 @@ public class Serialization {
 		}
 	}
 
-	private static MinecraftCreeper load() {
+	private static SaveData load() {
 		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) {
-			return (MinecraftCreeper) ois.readObject();
+			return (SaveData) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
