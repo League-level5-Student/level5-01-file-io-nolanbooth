@@ -66,10 +66,10 @@ public class FileEncryptor {
 
 		for (int i = 0; i < message.length(); i++) {
 			if (message.charAt(i) != ' ') {
-				int dumbthing = Character.getNumericValue(message.charAt(i)) - 10;
-				System.out.println(dumbthing);
+				int dumbthing = Character.getNumericValue(message.charAt(i))-10;
+				System.out.println("number = " + dumbthing);
 
-				bob.insert(i, scrambleArray[dumbthing]);
+				bob.insert(i, scrambleArray[(dumbthing)%26]);
 
 			} else {
 
@@ -84,9 +84,15 @@ public class FileEncryptor {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("noah.txt"));
 			
-			writer.write(finalMessage);
+			writer.write(finalMessage + "\n");
+			
+			writer.write(String.valueOf(offset));
 			
 			
+			//did not take offset by itself, because of the ascii thing - 33 = !
+			writer.flush();
+		
+			writer.close();		
 			
 			
 		} catch (IOException e) {
